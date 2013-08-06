@@ -11,8 +11,12 @@ Use my Linux Lab PC to control and fetch data from my lab equipment.
 * Scope Screenshot and Identity
 
 ## ToDo
-* Agilent PSU Control
-* Proper Scope Reads without waiting for Timeout
+* Add Agilent PSU Control
+* Figure OUt Proper USBTMC Reads without waiting for a timeout
+* Add Basic Error Checking 
+* Add DMM COntrol
+* Add Auto-UPloading of Scope-Shots to google drive
+* Add Scope Data fetching (actual data instead of screen shots)
 
 # Interfaces
 
