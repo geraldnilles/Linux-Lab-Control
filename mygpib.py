@@ -1,6 +1,7 @@
 import gpib
 
 DEFAULT_RECV_SIZE = 1000
+CHUNK_SIZE = 1000
 
 class device:
 	def __init__(self,gpib_address,card=0):
@@ -37,3 +38,31 @@ class Agilent_6626A(device):
 		pass
 
 
+class scope:
+	def __init__(self,device_number):
+		self.dev = "/dev/usbtmc"+str(device_number)
+	
+	def send(self,cmd):
+		f = open(self.dev,"w")
+		f.write(cmd+"\n")
+		f.close()
+
+	def recv(self):
+		f = open(self.dev,"rb")
+		output = f.read()
+		f.close()
+		return output	
+
+
+	def send_recv(self,cmd):
+		self.send(cmd)
+		return self.recv()
+
+	def identify(self):
+		return self.send_recv("*IDN?")
+
+	def save_screenshot(self,filename):
+		self.send("SAVe:IMAGe:FILEFormat PNG")
+		f = open(filename,"wb")
+		f.write(self.send_recv("HARDCopy START"))
+		f.close()
